@@ -1,0 +1,101 @@
+# DHTPeer: A Peer-to-Peer Network with Heartbeat and Dynamic Routing
+
+This project implements a lightweight peer-to-peer network using a Kademlia-style Distributed Hash Table (DHT) protocol, developed in Node.js. Each peer dynamically discovers other peers, exchanges routing tables, and maintains liveness through a custom heartbeat mechanism.
+
+---
+
+## What This Project Demonstrates
+
+- Peer discovery and decentralized routing using shared-prefix matching
+- Construction and parsing of compact binary protocol messages (kPTP)
+- Fault detection and peer removal using heartbeat tracking
+- TCP socket-based peer communication with full control over protocol flow
+- Real-time DHT updates with logging and routing decisions based on XOR distance
+
+---
+
+## How It Works
+
+1. **Start a Server Peer**
+   node DHTPeer.js -n server
+
+2. **Start a Connecting Peer**
+   node DHTPeer.js -n peer2 -p 127.0.0.1:PORT
+
+3. **Peer Connection Workflow**
+
+- The client sends a bootstrap request to the server.
+- The server responds with a welcome message (type 2), including its DHT table.
+- The client adds the server and its peers to its own table.
+- The client sends hello messages (type 4) to all known peers.
+- DHT tables are updated using shared-prefix logic and XOR distance comparison.
+
+4. **Heartbeat and Liveness Detection**
+
+- The server sends periodic heartbeat messages (type 6) to all peers in its DHT.
+- Each peer responds with a heartbeat response (type 8).
+- If a peer fails to respond three times in a row, it is removed from the DHT.
+
+---
+
+## Key Features
+
+- Distributed Hash Table (DHT) with shared prefix-based k-bucket design
+- Uses 16-bit blake2s hashes for compact peer identifiers
+- XOR distance comparison and timestamp logic for peer replacement
+- Structured output logs matching peer events (connect, hello, heartbeat, timeout)
+- Standalone operation using only Node.js standard libraries
+
+---
+
+## Example Console Output
+
+Connected from peer 127.0.0.1:47615 Bucket P5 has no value, adding fc36 My DHT: [P5, 127.0.0.1:47615, fc36]
+
+Attempting heartbeat to 127.0.0.1:47615 Sent heartbeat to fc36:47615 Received heartbeat response from fc36[fc36] at 2456 Updated last seen for fc36[fc36] from 1980 to 2456
+
+Bucket P5 is full, 3ae6 is closer than current fc36, replacing...
+
+---
+
+## What You Can Learn
+
+By exploring this project, you can:
+
+- Understand how distributed systems maintain routing information
+- Learn how fault tolerance is implemented using heartbeat logic
+- See how message protocols can be built from scratch using bit-level operations
+- Follow decision-making in routing updates using distance and timestamp rules
+- Gain experience debugging asynchronous peer-to-peer interactions
+
+---
+
+## Technologies Used
+
+- Node.js (`net`, `crypto`)
+- Custom binary protocol with hand-built message parser
+- CLI-based peer launching and testing
+- Minimal third-party dependencies
+
+---
+
+## Potential Extensions
+
+- Add file-sharing capability across the DHT
+- Support multiple peers per bucket (k > 1)
+- Implement NAT traversal support for public networking
+- Encrypt heartbeat and hello messages
+- Visualize the DHT structure in real time with a frontend
+
+---
+
+## Project Structure
+
+DHTPeer/ ├── DHTPeer.js # Main peer node logic (server or client) ├── Singleton.js # Utilities (hashing, timestamp, XOR, etc.) ├── kadPTPmessage.js # Protocol message builder and encoder ├── .vscode/launch.json # VS Code launch config (optional for debugging) ├── README.md # Project documentation
+
+---
+
+## Author
+
+Dawud Kaawan  
+Software Engineering
