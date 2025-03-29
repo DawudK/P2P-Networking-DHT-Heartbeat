@@ -11,7 +11,7 @@ const MSG_TYPE_HEARTBEAT = 6;
 const MSG_TYPE_HEARTBEAT_RESPONSE = 8;
 
 // get current folder name
-let HOST = "127.0.0.1";
+let HOST = "YOURHOST";
 let PORT = getPort(); //get random port number
 let serverID = singleton.getPeerID(HOST, PORT);
 
