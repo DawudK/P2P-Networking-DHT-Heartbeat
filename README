@@ -20,7 +20,7 @@ This project implements a lightweight peer-to-peer network using a Kademlia-styl
    node DHTPeer.js -n server
 
 2. **Start a Connecting Peer**
-   node DHTPeer.js -n peer2 -p 127.0.0.1:PORT
+   node DHTPeer.js -n peer2 -p YOURHOST:PORT
 
 3. **Peer Connection Workflow**
 
@@ -50,9 +50,9 @@ This project implements a lightweight peer-to-peer network using a Kademlia-styl
 
 ## Example Console Output
 
-Connected from peer 127.0.0.1:47615 Bucket P5 has no value, adding fc36 My DHT: [P5, 127.0.0.1:47615, fc36]
+Connected from peer YOURHOST:47615 Bucket P5 has no value, adding fc36 My DHT: [P5, YOURHOST:47615, fc36]
 
-Attempting heartbeat to 127.0.0.1:47615 Sent heartbeat to fc36:47615 Received heartbeat response from fc36[fc36] at 2456 Updated last seen for fc36[fc36] from 1980 to 2456
+Attempting heartbeat to YOURHOST:47615 Sent heartbeat to fc36:47615 Received heartbeat response from fc36[fc36] at 2456 Updated last seen for fc36[fc36] from 1980 to 2456
 
 Bucket P5 is full, 3ae6 is closer than current fc36, replacing...
 
